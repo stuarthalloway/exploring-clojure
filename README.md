@@ -1,6 +1,6 @@
 # exploring-clojure
 
-Template project for interactie exploration of Clojure.  Will gather a
+Template project for interactive exploration of Clojure.  Will gather a
 kitchen sink of dependencies over time.
 
 ## Usage
