@@ -15,10 +15,14 @@
                  [org.clojure/math.combinatorics "0.0.4"]
                  [org.clojure/test.generative "0.5.1"]
                  [com.datomic/datomic-free "0.8.4159"]
+                 #_[io.pedestal/pedestal.service "0.2.1"]
                  [clj-time "0.6.0"]
+                 [criterium/criterium "0.3.1"]
                  [dorothy "0.0.3"]
-                 [enlive/enlive "1.1.4"]]
+                 [enlive/enlive "1.1.4"]
+                 [prismatic/schema "0.1.5"]]
   :source-paths ["src/clj" "src/cljs"]
+  :profiles {:dev {:jvm-opts ["-Xmx2g" "-server"]}}
   :cljsbuild {:builds
               {:dev {:source-paths ["src/cljs"]
                      :compiler {:output-to "resources/public/javascript/exploring-clojure.js"
