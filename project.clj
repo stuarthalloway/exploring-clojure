@@ -18,7 +18,9 @@
                  [dorothy "0.0.3"]
                  [enlive/enlive "1.1.4"]
                  [prismatic/schema "0.1.5"]]
+  :plugins [[lein-typed "0.3.0"]]
   :source-paths ["src/clj" "src/cljs"]
+  :core.typed {:check [exploring.type-checked-namespace]}
   :profiles {:dev {:jvm-opts ["-Xmx2g" "-server"]}}
   :cljsbuild {:builds
               {:dev {:source-paths ["src/cljs"]
