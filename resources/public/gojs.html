@@ -1,0 +1,81 @@
+<html>
+
+  <head>
+    <link rel="stylesheet"
+          href="css/pure-min.css"/>
+    <style>
+      .proc-red { color: red;}
+      .proc-blue { color: blue;}
+      .proc-green { color: green;}
+      .pbox { padding: 1em;}
+    </style>
+      
+  </head>
+  
+  <body class="pbox">
+
+    <div class="pure-g-r">
+      <div class="pure-u-1">
+        <h2>Go blocks provide threadlike concurrency for
+          JavaScript</h2>
+      </div>
+    </div>
+    <div class="pure-g-r">
+      <div class="pure-u-1-4">
+        <div id="results" class="pbox">
+        </div>
+      </div>
+      
+      <div class="pure-u-1-4">
+        <pre>
+          <code>
+(go (while true
+  (&lt;! (sleep 250)) 
+  (&gt;! c "Red")))
+          </code>
+        </pre>
+        <a class="pure-button" id="go1">Go</a>
+      </div>
+      
+      <div class="pure-u-1-4">
+        <pre>
+          <code>
+(go (while true
+  (&lt;! (sleep 1000)) 
+  (&gt;! c "Blue")))
+          </code>
+        </pre>
+        <a class="pure-button" id="go2">Go</a>
+      </div>
+      
+      <div class="pure-u-1-4">
+        <pre>
+          <code>
+(go (while true
+  (&lt;! (sleep 2000))
+  (&gt;! c "Green")))
+          </code>
+        </pre>
+        <a class="pure-button" id="go3">Go</a>
+      </div>
+
+    </div>
+
+    <div class-"pure-g-r">
+      <div class="pure-u-1">
+        <div class="pbox">
+          (For more, see David
+          Nolen's <a href="http://swannodette.github.io/2013/07/12/communicating-sequential-processes/">CSP</a>
+          post.)
+        </div>
+      </div>
+    </div>
+    
+  </body>
+
+  <script type="text/javascript" src="javascript/exploring-clojure.js"></script>
+  <script type="text/javascript">
+    scriptbowl2013.core.start();
+  </script>
+  
+</html>

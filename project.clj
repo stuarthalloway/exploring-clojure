@@ -17,8 +17,9 @@
                  [criterium/criterium "0.3.1"]
                  [dorothy "0.0.3"]
                  [enlive/enlive "1.1.4"]
-                 [prismatic/schema "0.1.5"]]
-  :plugins [[lein-typed "0.3.0"]]
+                 [prismatic/schema "0.1.5"]
+                 [quil "1.6.0"]]
+  :plugins [[lein-typed "0.3.0"] [lein-cljsbuild "0.3.2"]]
   :source-paths ["src/clj" "src/cljs"]
   :core.typed {:check [exploring.type-checked-namespace]}
   :profiles {:dev {:jvm-opts ["-Xmx2g" "-server"]}}
