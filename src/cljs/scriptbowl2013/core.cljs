@@ -8,20 +8,9 @@
 (ns scriptbowl2013.core
   (:require [goog.events :as events]
             [goog.events.EventType]
-            [cljs.core.async :refer [>! <! chan put! close! timeout take!]])
+            [cljs.core.async :refer [>! <! chan put! close! timeout take! map<]])
   (:require-macros [cljs.core.async.macros :refer [go alt!]]
                    [scriptbowl2013.macros :refer [dochan]]))
-
-(defn map-ch
-  "Return a channel that maps f over in."
-  [f in]
-  (let [out (chan)]
-    (go (loop [x (<! in)]
-          (if (nil? x)
-            (close! out)
-            (do (>! out (f x))
-                (recur (<! in))))))
-    out))
 
 (def keyword->event-type
   "Map keyword names to goog event constants."
@@ -109,7 +98,7 @@
   (let [buttons (mapv by-id ["go1" "go2" "go3"])
         control-ch (chan)
         update-ch (chan)]
-    (control-loop (->> control-ch (map-ch event-target-id) log)
+    (control-loop (->> control-ch (map< event-target-id) log)
                   update-ch)
     (update-loop update-ch)
     (doseq [b buttons]
