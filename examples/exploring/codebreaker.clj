@@ -1,3 +1,7 @@
+;; iteratively develop and test a codebreaker scorer at a Clojure REPL
+;; compare with the example-based version described in The RSpec Book
+;;    http://pragprog.com/book/achbd/the-rspec-book
+
 (ns exploring.codebreaker
   (:require
    [clojure.repl :refer :all]
@@ -11,8 +15,8 @@
 
 (def secret [:r :g :b :y])
 (def guess  [:g :g :g :r])
+;; score should be 1 black, 1 white
 
-;; 1 black, 1 white
 (defn exact-matches
   "Returns the count of matches in the same position in
    both a and b."
@@ -23,28 +27,11 @@
 
 (exact-matches secret guess)
 
-(def zeros {:r 0 :g 0 :b 0 :y 0})
 
-(->> (merge-with
-      min
-      (merge zeros (frequencies guess))
-      (merge zeros (frequencies secret)))
-     vals
-     (apply +))
-
-(->> (merge-with
-      min
-      (merge zeros (frequencies secret))
-      (merge zeros (frequencies guess)))
-     vals
-     (apply +))
-
-(->> (merge-with
-      min
-      (select-keys (frequencies secret) guess)
-      (select-keys (frequencies guess) secret))
-     vals
-     (reduce +))
+;; iteratively develop all-matches
+(merge-with min
+            (frequencies secret)
+            (frequencies guess))
 
 (defn all-matches
   "Returns the count of matches regardless of position in
@@ -71,6 +58,7 @@
 (scorer guess)
 (scorer secret)
 
+;; property-based test
 (defn validate-score
   [a b {:keys [exact unordered]}]
   (let [desc {:a a :b b :exact exact :unordered unordered}
@@ -89,6 +77,7 @@
 
 (set! *print-length* 100)
 
+;; exhaustive testing
 (defn all-turns
   "Returns all possible pairs of score, guess for a codebreaker
    game with colors and n columns"
@@ -124,6 +113,7 @@
 
 (def colors [:r :g :b :y :p :o])
 
+;; generative testing
 (defn gen-guess
   [colors n]
   (gen/vec #(gen/rand-nth colors) n))
@@ -161,6 +151,7 @@
      :guess guess
      :score %}))
 
+;; example
 (test-scoring t)
 
 ;; interactive
