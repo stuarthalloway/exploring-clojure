@@ -60,6 +60,8 @@
 
 ;; property-based test
 (defn validate-score
+  "Validate that exact, unordered are the correct score for
+   secret/guess combo a,b."
   [a b {:keys [exact unordered]}]
   (let [desc {:a a :b b :exact exact :unordered unordered}
         fail #(throw (ex-info % desc))]
@@ -76,6 +78,13 @@
 (validate-score secret guess (scorer secret))
 
 (set! *print-length* 100)
+
+(comb/selections [:r :b] 3)
+
+(map vec (comb/selections [:r :b] 3))
+
+(-> (map vec (comb/selections [:r :b] 2))
+    (comb/selections 2))
 
 ;; exhaustive testing
 (defn all-turns
@@ -114,6 +123,8 @@
 (def colors [:r :g :b :y :p :o])
 
 ;; generative testing
+(gen/vec #(gen/rand-nth colors) 2)
+
 (defn gen-guess
   [colors n]
   (gen/vec #(gen/rand-nth colors) n))
@@ -181,3 +192,41 @@
 (test-winning-score win)
 
 (runner/run 2 1000 #'test-winning-score)
+
+;; using test.check
+(do
+  (require '[clojure.test.check :as tc])
+  (require '[clojure.test.check.generators :as tcgen])
+  (require '[clojure.test.check.properties :as tcprop]))
+
+(defn tcgen-turn
+  "Create a test.check generator for turn."
+  [colors n]
+  (let [play (tcgen/vector (tcgen/elements colors) n)]
+    (tcgen/tuple play play)))
+
+;; test the generator
+(tcgen/sample (tcgen-turn colors 6) 2)
+
+(def matches-not-greater-than-secret-prop
+  (tcprop/for-all
+   [turn (tcgen-turn colors 6)]
+   (let [{:keys [exact unordered]} (score-turn turn)]
+     (<= (+ exact unordered) (count (first turn))))))
+
+(tc/quick-check 100 matches-not-greater-than-secret-prop)
+
+;; N.B. this is deliberately untrue
+(def matches-less-than-secret-prop
+  (tcprop/for-all
+   [turn (tcgen/shrink-2 (tcgen-turn colors 6))]
+   (let [{:keys [exact unordered]} (score-turn turn)]
+     (< (+ exact unordered) (count (first turn))))))
+
+(tc/quick-check 1000 matches-less-than-secret-prop)
+
+
+
+
+
+
