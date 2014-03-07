@@ -28,6 +28,12 @@ time, from the REPL.
   [core.async](https://github.com/clojure/core.async) repo and work
   through the examples directory.
 
+## Generative Testing
+
+Run generative tests
+
+    lein run -m run-tests
+
 ## Other things to try
 
 * Keep a copy of the [Clojure

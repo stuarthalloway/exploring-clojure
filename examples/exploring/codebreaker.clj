@@ -17,6 +17,10 @@
 (def guess  [:g :g :g :r])
 ;; score should be 1 black, 1 white
 
+(->> (map = secret guess)
+     (filter identity)
+     count)
+
 (defn exact-matches
   "Returns the count of matches in the same position in
    both a and b."
@@ -26,7 +30,6 @@
        count))
 
 (exact-matches secret guess)
-
 
 ;; iteratively develop all-matches
 (merge-with min
