@@ -2,7 +2,7 @@
   :description "Template project for interactive exploration of Clojure"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0-beta2"]
+  :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-1889"]
                  [org.clojure/core.async "0.1.278.0-76b25b-alpha" #_"0.1.242.0-44b1e3-alpha" #_"0.1.222.0-83d0c2-alpha"]
                  [org.clojure/core.logic "0.6.6"]
@@ -12,7 +12,9 @@
                  [org.clojure/math.combinatorics "0.0.4"]
                  [org.clojure/test.generative "0.5.1"]
                  [org.clojure/test.check "0.5.7"]
-                 [com.datomic/datomic-free "0.9.4572"]
+                 [com.datomic/datomic-free "0.9.4699"]
+                 [com.datomic/simulant "0.1.7"]
+                 [gorilla-repl "0.1.2"]
                  [clj-time "0.6.0"]
                  [criterium/criterium "0.3.1"]
                  [dorothy "0.0.3"]
