@@ -2,7 +2,7 @@
   :description "Template project for interactive exploration of Clojure"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0-alpha1"]
                  [org.clojure/clojurescript "0.0-1889"]
                  [org.clojure/core.async "0.1.278.0-76b25b-alpha" #_"0.1.242.0-44b1e3-alpha" #_"0.1.222.0-83d0c2-alpha"]
                  [org.clojure/core.logic "0.6.6"]
