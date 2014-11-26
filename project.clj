@@ -15,6 +15,7 @@
                  [com.datomic/datomic-free "0.9.4699"]
                  [com.datomic/simulant "0.1.7"]
                  [gorilla-repl "0.3.3"]
+                 [clj-webdriver "0.6.1"]
                  [clj-time "0.6.0"]
                  [criterium/criterium "0.3.1"]
                  [dorothy "0.0.3"]
