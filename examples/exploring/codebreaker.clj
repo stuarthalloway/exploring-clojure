@@ -66,7 +66,7 @@
   "Validate that exact, unordered are the correct score for
    secret/guess combo a,b."
   [a b {:keys [exact unordered]}]
-  (let [desc {:a a :b b :exact exact :unordered unordered}
+  (let [desc {:a a, :b b, :exact exact, :unordered unordered}
         fail #(throw (ex-info % desc))]
     (when-not (<= 0 exact)
       (fail "Exact matches should not be negative"))
